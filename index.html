@@ -1,35 +1,65 @@
 <html>
-    <head>
-        <title>Vue 101</title>
-    </head>
 
-    <body>
-        <h1>Hello!</h1>
-        <div id="app">
-          <p>My local property: {{ myLocalProperty }}</p>
-          <hr>
-          <button @click="buttonClicked">Click me</button>
-        </div>
+<head>
+  <title>Vue 101</title>
+</head>
+<body>
+  <div id="app">
+    <age-calculator 
+      v-for="person in people" 
+      :person="person"
+      :key="person.name"></age-calculator>
+  </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<h3 style = "color:green">    
+<br>Working with employment opportunities in: </h3>
+<h4 style = "color:magenta">   
+    <br>Sales
+    <br>Engineering (all disciplines)<br> Management (all categories) 
+    <br>Construction Management 
+    <br>Entry level employment
+    <br>Merit advancement </h4>
+<h3 style = "color:green">
+    <br>Professional positions based upon experience and education
+    <br>Self-employment by becoming a working COOP member </h3>
+    <h5 style = "color:brown">
+    <br>CALL (520) 300-6340, nk@World-of-work-services-coop.com
+    <br>Kay or Josh Harmon, 141 S. 6th Ave, Unit 42, Tucson, Az 85702 </h5>
 
-        <script>
-          const app = new Vue({
-            el: '#app',
-            data: {
-              myLocalProperty: 'Im a local property value'
-            },
-            methods: {
-              buttonClicked() {
-                const newText = 'The new value is: ' + Math.floor( Math.random() * 100 );
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
-                this.myLocalProperty = newText;
-              }
-            }
-          });
-        </script>
-    </body>
+  <script>
+    Vue.component('age-calculator', {
+      props: {
+        person: {
+          type: Object,
+          required: true
+        }
+      },
+      template: `
+        <p>
+          {{ person.name }} has been kicking butt for {{ daysAlive }} days!
+        </p>
+      `,
+      computed: {
+        daysAlive() {
+          return this.person.age * 365
+        }
+      }
+    });
+
+    const app = new Vue({
+      el: '#app',
+      data: {
+        people: [
+          { name: 'Mario', age: 38 },
+          { name: 'Luigi', age: 38 },
+          { name: 'Samus', age: 31 },
+          { name: 'Link', age: 20 }
+        ]
+      }
+    });
+  </script>
+</body>
+
 </html>
-
-
-
